@@ -5,6 +5,7 @@ require('dotenv').config()
 require('express-async-errors')
 
 const express = require('express')
+const authRouter = require('./routes/authRoute')
 const app = express()
 
 const morgan = require('morgan')
@@ -21,6 +22,8 @@ const errorHandlerMiddleware = require('./middleware/error-handler')
 app.get('/', (req, res) => {
   res.send('This is an e-commerce website')
 })
+
+app.use('/api/v1/auth', authRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
