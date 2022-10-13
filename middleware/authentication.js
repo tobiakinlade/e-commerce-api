@@ -16,10 +16,14 @@ const authenticateUser = async (req, res, next) => {
   next()
 }
 
-const authorizePermissions = async (req, res, next) => {
-  if (req.user.role !== 'admin') {
-    throw new CustomError.UnauthorizedError('Unauthorized to access this route')
+const authorizePermissions = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      throw new CustomError.UnauthenticatedError(
+        'Unauthorized to access this route'
+      )
+    }
+    next()
   }
-  next()
 }
 module.exports = { authenticateUser, authorizePermissions }
