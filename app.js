@@ -9,7 +9,9 @@ const authRouter = require('./routes/authRoute')
 const app = express()
 
 const morgan = require('morgan')
+const cookieParser = require('cookie-parser')
 app.use(morgan('tiny'))
+app.use(cookieParser())
 
 const connectDB = require('./db/connect')
 
@@ -19,7 +21,8 @@ app.use(express.json())
 const notFoundMiddleware = require('./middleware/not-found')
 const errorHandlerMiddleware = require('./middleware/error-handler')
 
-app.get('/', (req, res) => {
+app.get('/api/v1', (req, res) => {
+  console.log(req.cookies)
   res.send('This is an e-commerce website')
 })
 
