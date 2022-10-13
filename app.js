@@ -11,7 +11,7 @@ const app = express()
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 app.use(morgan('tiny'))
-app.use(cookieParser())
+app.use(cookieParser(process.env.JWT_SECRET))
 
 const connectDB = require('./db/connect')
 
@@ -22,7 +22,7 @@ const notFoundMiddleware = require('./middleware/not-found')
 const errorHandlerMiddleware = require('./middleware/error-handler')
 
 app.get('/api/v1', (req, res) => {
-  console.log(req.cookies)
+  console.log(req.signedCookies)
   res.send('This is an e-commerce website')
 })
 
