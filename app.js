@@ -8,16 +8,21 @@ const express = require('express')
 const authRouter = require('./routes/authRoute')
 const userRouter = require('./routes/userRoutes')
 const productRouter = require('./routes/productRoutes')
+const fileUpload = require('express-fileupload')
 const app = express()
 
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
+
 app.use(morgan('tiny'))
 app.use(cookieParser(process.env.JWT_SECRET))
 
 const connectDB = require('./db/connect')
 
 app.use(express.json())
+
+app.use(express.static('./public'))
+app.use(fileUpload())
 
 // error handler
 const notFoundMiddleware = require('./middleware/not-found')
