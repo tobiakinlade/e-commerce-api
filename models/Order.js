@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const SingleCartItemSchema = mongoose.Schema({
+const SingleOrderItemSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -22,7 +22,7 @@ const SingleCartItemSchema = mongoose.Schema({
     ref: 'Product',
     required: true,
   },
-})
+});
 
 const OrderSchema = new mongoose.Schema(
   {
@@ -42,7 +42,7 @@ const OrderSchema = new mongoose.Schema(
       type: Number,
       require: true,
     },
-    cartItems: [SingleCartItemSchema],
+    orderItems: [SingleOrderItemSchema],
     status: {
       type: String,
       enum: ['pending', 'failed', 'paid', 'delivered', 'canceled'],
@@ -64,6 +64,6 @@ const OrderSchema = new mongoose.Schema(
   {
     timestamps: true,
   }
-)
+);
 
-module.exports = mongoose.model('Order', OrderSchema)
+module.exports = mongoose.model('Order', OrderSchema);

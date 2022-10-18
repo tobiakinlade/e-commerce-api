@@ -3,7 +3,6 @@ const Review = require('../models/Review')
 const Product = require('../models/Product')
 const CustomError = require('../errors')
 const { checkPermissions } = require('../utils')
-const { request } = require('express')
 
 const createReview = async (req, res) => {
   const { product: productId } = req.body
